@@ -2,6 +2,7 @@
 [![Build Status](https://travis-ci.org/dynamic/foxystripe-inventory.svg?branch=master)](https://travis-ci.org/dynamic/foxystripe-inventory)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/dynamic/foxystripe-inventory/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/dynamic/foxystripe-inventory/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/dynamic/foxystripe-inventory/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/dynamic/foxystripe-inventory/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/dynamic/foxystripe-inventory/badges/build.png?b=master)](https://scrutinizer-ci.com/g/dynamic/foxystripe-inventory/build-status/master)
 [![codecov](https://codecov.io/gh/dynamic/foxystripe-inventory/branch/master/graph/badge.svg)](https://codecov.io/gh/dynamic/foxystripe-inventory)
 
 [![Latest Stable Version](https://poser.pugx.org/dynamic/foxystripe-inventory/version)](https://packagist.org/packages/dynamic/foxystripe-inventory)
