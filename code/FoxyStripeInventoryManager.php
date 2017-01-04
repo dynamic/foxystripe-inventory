@@ -16,17 +16,54 @@ class FoxyStripeInventoryManager extends DataExtension
      */
     public function updateCMSFields(FieldList $fields)
     {
+        $fields->removeByName(array(
+            'PurchaseLimit',
+            'EmbargoLimit',
+            'NumberPurchased',
+        ));
+
         $fields->addFieldsToTab('Root.Inventory', array(
             CheckboxField::create('ControlInventory', 'Control Inventory?')
                 ->setDescription('limit the number of this product available for purchase'),
-            NumericField::create('PurchaseLimit')
-                ->setTitle('Number Available')
-                ->setDescription('add to cart form will be disabled once number available equals purchased'),
-            ReadonlyField::create('NumberPurchased', 'Purchased', $this->getNumberPurchased()),
-            NumericField::create('EmbargoLimit')
-                ->setTitle('Embargo Time')
-                ->setDescription('time in seconds to reserve an item once added to cart'),
+            DisplayLogicWrapper::create(
+                NumericField::create('PurchaseLimit')
+                    ->setTitle('Number Available')
+                    ->setDescription('add to cart form will be disabled once number available equals purchased'),
+                ReadonlyField::create('NumberPurchased', 'Purchased', $this->getNumberPurchased())//,
+                /*
+                NumericField::create('EmbargoLimit')
+                    ->setTitle('Embargo Time')
+                    ->setDescription('time in seconds to reserve an item once added to cart')
+                */
+            )->displayIf('ControlInventory')->isChecked()->end(),
         ));
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHasInventory()
+    {
+        return $this->owner->ControlInventory && $this->owner->PurchaseLimit != 0;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsProductAvailable()
+    {
+        if ($this->owner->getHasInventory()) {
+            return $this->owner->PurchaseLimit > $this->getNumberPurchased();
+        }
+        return true;
+    }
+
+    public function getNumberAvailable()
+    {
+        if ($this->getIsProductAvailable()) {
+            return (int)$this->owner->PurchaseLimit - (int)$this->getNumberPurchased();
+        }
+
     }
 
     /**
@@ -54,14 +91,6 @@ class FoxyStripeInventoryManager extends DataExtension
         }
         return false;
     }
-
-    /**
-     * @return bool
-     */
-    public function getIsProductAvailable()
-    {
-        return $this->owner->ControlInventory && $this->owner->PurchaseLimit != 0 && $this->owner->PurchaseLimit < $this->getNumberPurchased();
-    }
 }
 
 class FoxyStripeInventoryManagerExtension extends Extension
@@ -73,6 +102,20 @@ class FoxyStripeInventoryManagerExtension extends Extension
     {
         if (!$this->owner->getIsProductAvailable()) {
             $form = false;
+            return;
+        }
+
+        if ($this->owner->getHasInventory()) {
+            $quantityMax = $this->owner->getNumberAvailable();
+            $count = 1;
+            $quantity = array();
+            while ($count <= $quantityMax) {
+                $countVal = ProductPage::getGeneratedValue($this->owner->Code, 'quantity', $count, 'value');
+                $quantity[$countVal] = $count;
+                $count++;
+            }
+            $fields = $form->Fields();
+            $fields->replaceField('quantity', DropdownField::create('quantity', 'Quantity', $quantity));
         }
     }
 }
