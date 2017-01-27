@@ -15,7 +15,7 @@
     "require": {
         "silverstripe/cms": "^3.2",
         "silverstripe/framework": "^3.2",
-        "dynamic/foxystripe": "2.0.x-dev",
+        "dynamic/foxystripe": "^1.2",
         "unclecheese/display-logic": "^1.4"
     },
     "require-dev": {
