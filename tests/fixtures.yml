@@ -6,6 +6,7 @@ TestProduct:
     Title: 'Product One'
     ControlInventory: 1
     PurchaseLimit: 3
+    Price: '$10.00'
 Order:
   one:
     OrderTotal: '$20.00'
@@ -16,3 +17,13 @@ OrderDetail:
   two:
     Quantity: 1
     ProductID: =>TestProduct.one
+OptionGroup:
+  default:
+    Title: 'Options'
+TestOption:
+  one:
+    Title: 'Blue'
+    ProductID: =>TestProduct.one
+    ProductOptionGroupID: =>OptionGroup.default
+  two:
+    Title: 'Red'
