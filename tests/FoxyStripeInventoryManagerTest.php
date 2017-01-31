@@ -1,21 +1,7 @@
 <?php
 
-class FoxyStripeInventoryManagerTest extends SapphireTest
+class FoxyStripeInventoryManagerTest extends FoxyStripeInventoryTest
 {
-    /**
-     * @var array
-     */
-    protected static $fixture_file = array(
-        'foxystripe-inventory/tests/fixtures.yml',
-    );
-
-    /**
-     * @var array
-     */
-    protected $extraDataObjects = [
-        'TestProduct',
-    ];
-
     /**
      *
      */
@@ -36,14 +22,4 @@ class FoxyStripeInventoryManagerTest extends SapphireTest
         $controller = new TestProduct_Controller($object);
         $this->assertFalse($controller->PurchaseForm());
     }
-}
-
-class TestProduct extends ProductPage implements TestOnly
-{
-    private static $extensions = ['FoxyStripeInventoryManager'];
-}
-
-class TestProduct_Controller extends ProductPage_Controller
-{
-    private static $extensions = ['FoxyStripeInventoryManagerExtension'];
 }
