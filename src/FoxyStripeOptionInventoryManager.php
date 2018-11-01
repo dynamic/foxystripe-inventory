@@ -1,5 +1,15 @@
 <?php
 
+namespace Dynamic\FoxyStripe\ORM;
+
+use Dynamic\FoxyStripe\Model\OrderDetail;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\NumericField;
+use SilverStripe\Forms\ReadonlyField;
+use SilverStripe\ORM\DataExtension;
+use UncleCheese\DisplayLogic\Forms\Wrapper;
+
 class FoxyStripeOptionInventoryManager extends DataExtension
 {
     /**
@@ -24,7 +34,7 @@ class FoxyStripeOptionInventoryManager extends DataExtension
         $fields->addFieldsToTab('Root.Inventory', array(
             CheckboxField::create('ControlInventory', 'Control Inventory?')
                 ->setDescription('limit the number of this product available for purchase'),
-            DisplayLogicWrapper::create(
+            Wrapper::create(
                 NumericField::create('PurchaseLimit')
                     ->setTitle('Number Available')
                     ->setDescription('add to cart form will be disabled once number available equals purchased'),
@@ -82,7 +92,7 @@ class FoxyStripeOptionInventoryManager extends DataExtension
     public function getOrders()
     {
         if ($this->owner->ID) {
-            return OrderDetail::get()->filter('Options.ID', $this->owner->ID);
+            return OrderDetail::get()->filter('OrderOptions.ID', $this->owner->ID);
         }
         return false;
     }
