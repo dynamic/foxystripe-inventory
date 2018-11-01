@@ -27,9 +27,6 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "extra": {
-        "installer-name": "foxystripe-inventory",
-        "branch-alias": {
-            "dev-master": "1.0.x-dev"
-        }
+        "installer-name": "foxystripe-inventory"
     }
 }
