@@ -2,3 +2,9 @@ mappings:
   FoxyStripeOptionInventoryManager: Dynamic\FoxyStripe\ORM\FoxyStripeOptionInventoryManager
   FoxyStripeInventoryManager: Dynamic\FoxyStripe\ORM\FoxyStripeInventoryManager
   FoxyStripeInventoryManagerExtension: Dynamic\FoxyStripe\ORM\FoxyStripeInventoryManagerExtension
+  FoxyStripeInventoryManagerTest: Dynamic\FoxyStripe\Test\FoxyStripeInventoryManagerTest
+  FoxyStripeOptionInventoryManagerTest: Dynamic\FoxyStripe\Test\FoxyStripeOptionInventoryManagerTest
+  FoxyStripeInventoryTest: Dynamic\FoxyStripe\Test\FoxyStripeInventoryTest
+  TestProduct: Dynamic\FoxyStripe\Test\TestProduct
+  TestProduct_Controller: Dynamic\FoxyStripe\Test\TestProduct_Controller
+  TestOption: Dynamic\FoxyStripe\Test\TestOption

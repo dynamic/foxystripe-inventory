@@ -1,26 +1,26 @@
-ProductCategory:
+Dynamic\FoxyStripe\Model\ProductCategory:
   default:
     Code: 'DEFAULT'
-TestProduct:
+Dynamic\FoxyStripe\Test\TestProduct:
   one:
     Title: 'Product One'
     ControlInventory: 1
     PurchaseLimit: 3
     Price: '$10.00'
-Order:
+Dynamic\FoxyStripe\Model\Order:
   one:
     OrderTotal: '$20.00'
-OrderDetail:
+Dynamic\FoxyStripe\Model\OrderDetail:
   one:
     Quantity: 2
     ProductID: =>TestProduct.one
   two:
     Quantity: 1
     ProductID: =>TestProduct.one
-OptionGroup:
+Dynamic\FoxyStripe\Model\OptionGroup:
   default:
     Title: 'Options'
-TestOption:
+Dynamic\FoxyStripe\Test\TestOption:
   one:
     Title: 'Blue'
     ProductID: =>TestProduct.one
