@@ -2,11 +2,29 @@
 
 namespace Dynamic\FoxyStripe\Test;
 
-use Dynamic\FoxyStripe\Test\TestProduct;
+use Dynamic\FoxyStripe\Test\TestOnly\TestOption;
+use Dynamic\FoxyStripe\Test\TestOnly\TestProduct;
+use Dynamic\FoxyStripe\Test\TestOnly\TestProductController;
+use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Forms\FieldList;
 
-class FoxyStripeInventoryManagerTest extends FoxyStripeInventoryTest
+class FoxyStripeInventoryManagerTest extends SapphireTest
 {
+    /**
+     * @var array
+     */
+    protected static $fixture_file = array(
+        '../fixtures.yml',
+    );
+
+    /**
+     * @var array
+     */
+    protected static $extra_dataobjects = [
+        TestProduct::class,
+        TestOption::class,
+    ];
+
     /**
      *
      */
@@ -24,7 +42,7 @@ class FoxyStripeInventoryManagerTest extends FoxyStripeInventoryTest
     public function testFoxyStripePurchaseForm()
     {
         $object = $this->objFromFixture(TestProduct::class, 'one');
-        $controller = new TestProduct_Controller($object);
+        $controller = new TestProductController($object);
         $this->assertFalse($controller->PurchaseForm());
     }
 }

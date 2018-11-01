@@ -92,7 +92,7 @@ class FoxyStripeOptionInventoryManager extends DataExtension
     public function getOrders()
     {
         if ($this->owner->ID) {
-            return OrderDetail::get()->filter('Options.ID', $this->owner->ID);
+            return OrderDetail::get()->filter('OrderOptions.ID', $this->owner->ID);
         }
         return false;
     }
