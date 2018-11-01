@@ -1,0 +1,4 @@
+mappings:
+  FoxyStripeOptionInventoryManager: Dynamic\FoxyStripe\ORM\FoxyStripeOptionInventoryManager
+  FoxyStripeInventoryManager: Dynamic\FoxyStripe\ORM\FoxyStripeInventoryManager
+  FoxyStripeInventoryManagerExtension: Dynamic\FoxyStripe\ORM\FoxyStripeInventoryManagerExtension
