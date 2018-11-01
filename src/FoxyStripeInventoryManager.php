@@ -44,8 +44,8 @@ class FoxyStripeInventoryManager extends DataExtension
                 ReadonlyField::create('NumberPurchased', 'Purchased', $this->getNumberPurchased())//,
                 /*
                 NumericField::create('EmbargoLimit')
-                    ->setTitle('Embargo Time')
-                    ->setDescription('time in seconds to reserve an item once added to cart')
+                ->setTitle('Embargo Time')
+                ->setDescription('time in seconds to reserve an item once added to cart')
                 */
             )->displayIf('ControlInventory')->isChecked()->end(),
         ));
@@ -78,7 +78,6 @@ class FoxyStripeInventoryManager extends DataExtension
         if ($this->getIsProductAvailable()) {
             return (int)$this->owner->PurchaseLimit - (int)$this->getNumberPurchased();
         }
-
     }
 
     /**

@@ -2,7 +2,6 @@
 
 namespace Dynamic\FoxyStripe\Test\TestOnly;
 
-
 use Dynamic\FoxyStripe\ORM\FoxyStripeInventoryManagerExtension;
 use Dynamic\FoxyStripe\Page\ProductPageController;
 
