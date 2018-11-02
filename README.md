@@ -15,16 +15,16 @@
 simple inventory and embargo add-on for FoxyStripe
 
 ## Requirements
-
-- SilverStripe 3.2
+- SilverStripe ^4.0
+- dynamic/foxystripe ^4.0
+- unclecheese/display-logic ^2.0
 
 ## Installation
 
-This is how you install foxystripe-inventory.
+`composer require dynamic/silverstripe-locator:^2.0`
 
 ## Example usage
-
-You use foxystripe-inventory like this.
+Allows to set a limit of how many of a product can be purchased.
 
 ## Documentation
 
