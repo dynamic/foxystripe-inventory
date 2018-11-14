@@ -5,16 +5,29 @@ namespace Dynamic\FoxyStripe\ORM;
 use Dynamic\FoxyStripe\Page\ProductPage;
 use SilverStripe\Core\Extension;
 use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\HeaderField;
 
+/**
+ * Class FoxyStripeInventoryManagerExtension
+ * @package Dynamic\FoxyStripe\ORM
+ *
+ * @property ProductPage|\Dynamic\FoxyStripe\ORM\FoxyStripeInventoryManager $owner
+ */
 class FoxyStripeInventoryManagerExtension extends Extension
 {
     /**
-     * @param $form
+     * @param \SilverStripe\Forms\Form $form
      */
     public function updateFoxyStripePurchaseForm(&$form)
     {
-        if (!$this->owner->getIsProductAvailable()) {
-            $form = false;
+        if ($this->owner->Available && !$this->owner->getIsProductAvailable()) {
+            $form->setFields(FieldList::create([
+                HeaderField::create('submitPrice', 'Currently Out of Stock', 4),
+            ]));
+            if ($submit = $form->Actions()->fieldByName('')) {
+                $submit->setAttribute('Disabled', true);
+            }
             return;
         }
 
