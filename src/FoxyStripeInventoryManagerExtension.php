@@ -23,7 +23,7 @@ class FoxyStripeInventoryManagerExtension extends Extension
     {
         if ($this->owner->Available && !$this->owner->getIsProductAvailable()) {
             $form->setFields(FieldList::create([
-                HeaderField::create('submitPrice', 'Currently Out of Stock', 4),
+                HeaderField::create('OutOfStock', 'Currently Out of Stock', 4),
             ]));
             if ($submit = $form->Actions()->fieldByName('')) {
                 $submit->setAttribute('Disabled', true);

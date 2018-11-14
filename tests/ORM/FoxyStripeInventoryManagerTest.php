@@ -7,6 +7,8 @@ use Dynamic\FoxyStripe\Test\TestOnly\TestProduct;
 use Dynamic\FoxyStripe\Test\TestOnly\TestProductController;
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\Form;
+use SilverStripe\Forms\HeaderField;
 
 class FoxyStripeInventoryManagerTest extends SapphireTest
 {
@@ -43,6 +45,8 @@ class FoxyStripeInventoryManagerTest extends SapphireTest
     {
         $object = $this->objFromFixture(TestProduct::class, 'one');
         $controller = new TestProductController($object);
-        $this->assertFalse($controller->PurchaseForm());
+        $form = $controller->PurchaseForm();
+        $this->assertInstanceOf(Form::class, $form);
+        $this->assertInstanceOf(HeaderField::class, $form->Fields()->fieldByName('OutOfStock'));
     }
 }
