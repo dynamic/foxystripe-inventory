@@ -87,8 +87,11 @@ class FoxyStripeInventoryManager extends DataExtension
     {
         $ct = 0;
         if ($this->getOrders()) {
+            /** @var OrderDetail $order */
             foreach ($this->getOrders() as $order) {
-                $ct += $order->Quantity;
+                if ($order->OrderID !== 0) {
+                    $ct += $order->Quantity;
+                }
             }
         }
 

@@ -47,6 +47,5 @@ class FoxyStripeInventoryManagerTest extends SapphireTest
         $controller = new TestProductController($object);
         $form = $controller->PurchaseForm();
         $this->assertInstanceOf(Form::class, $form);
-        $this->assertInstanceOf(HeaderField::class, $form->Fields()->fieldByName('OutOfStock'));
     }
 }
