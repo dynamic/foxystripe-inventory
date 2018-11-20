@@ -46,8 +46,10 @@ class ProductPageDataExtension extends DataExtension
                 ->setDescription("After the time listed above in minutes, this product will be removed from the user's cart"),
         ];
 
+        $duration->displayIf('CartExpiration')->isChecked()->end();
+
         if ($this->owner->CartReservations()->exists()) {
-            $expirationFields[] = GridField::create(
+            $expirationGrid = GridField::create(
                 'CartReservations',
                 'Cart Reservations',
                 $this->owner->CartReservations()
@@ -55,6 +57,9 @@ class ProductPageDataExtension extends DataExtension
                     ->sort('Created'),
                 $cartResConfig = GridFieldConfig_RecordViewer::create()
             );
+            $expirationGrid->displayIf('CartExpiration')->isChecked()->end();
+
+            $expirationFields[] = $expirationGrid;
         }
 
         $fields->addFieldsToTab(
