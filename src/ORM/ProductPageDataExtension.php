@@ -69,8 +69,11 @@ class ProductPageDataExtension extends DataExtension
     public function validate(ValidationResult $validationResult)
     {
         if ($this->owner->CartExpiration && $this->owner->ExpirationMinutes < 1) {
-            $validationResult->addFieldError('ExpirationMinutes',
-                'You must set the "Expiration In Minutes" or disable "Cart Product Expiration"');
+            $validationResult
+                ->addFieldError(
+                    'ExpirationMinutes',
+                    'You must set the "Expiration In Minutes" or disable "Cart Product Expiration"'
+                );
         }
     }
 }
