@@ -1,3 +1,14 @@
 ---
 Name: foxystripeinventoryconfig
 ---
+Dynamic\FoxyStripe\Page\ProductPage:
+  extensions:
+    - Dynamic\FoxyStripe\ORM\ProductPageDataExtension
+
+Dynamic\FoxyStripe\Page\ProductPageController:
+  extensions:
+    - Dynamic\FoxyStripe\Extension\ProductPageControllerExtension
+
+Dynamic\FoxyStripe\Form\FoxyStripePurchaseForm:
+  extensions:
+    - Dynamic\FoxyStripe\Extension\PurchaseFormExtension
