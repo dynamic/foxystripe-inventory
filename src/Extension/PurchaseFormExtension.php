@@ -47,7 +47,7 @@ class PurchaseFormExtension extends Extension
                 ])->count();
             $sold = $this->owner->getProduct()->getNumberPurchased();
 
-            if ($reserved + $sold >= 1/*$this->owner->getProduct()->PurchaseLimit*/) {
+            if ($reserved + $sold >= $this->owner->getProduct()->PurchaseLimit) {
                 $fields->replaceField(
                     'action_',
                     HeaderField::create('OutOfStock', 'Out of stock')
