@@ -2,9 +2,12 @@
 
 namespace Dynamic\FoxyStripe\Extension;
 
+use Dynamic\FoxyStripe\Model\ProductCartReservation;
 use Dynamic\FoxyStripe\Page\ProductPage;
 use SilverStripe\Core\Extension;
+use SilverStripe\Dev\Debug;
 use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\HiddenField;
 
 /**
@@ -28,6 +31,29 @@ class PurchaseFormExtension extends Extension
                         )
                     )
             );
+        }
+    }
+
+    /**
+     * @param FieldList $fields
+     */
+    public function updateFoxyStripePurchaseFormActions(FieldList $fields)
+    {
+        if ($this->owner->getProduct()->ControlInventory) {
+            $reserved = ProductCartReservation::get()
+                ->filter([
+                    'Code' => $this->owner->getProduct()->Code,
+                    'Expires:GreaterThan' => date('Y-m-d H:i:s', strtotime('now')),
+                ])->count();
+            $sold = $this->owner->getProduct()->getNumberPurchased();
+
+            if ($reserved + $sold >= 1/*$this->owner->getProduct()->PurchaseLimit*/) {
+                $fields->replaceField(
+                    'action_',
+                    HeaderField::create('OutOfStock', 'Out of stock')
+                        ->setHeadingLevel(3)
+                );
+            }
         }
     }
 }

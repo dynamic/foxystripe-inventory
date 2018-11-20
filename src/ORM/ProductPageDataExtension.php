@@ -50,7 +50,9 @@ class ProductPageDataExtension extends DataExtension
             $expirationFields[] = GridField::create(
                 'CartReservations',
                 'Cart Reservations',
-                $this->owner->CartReservations()->sort('Created'),
+                $this->owner->CartReservations()
+                    ->filter('Expires:GreaterThan', date('Y-m-d H:i:s', strtotime('now')))
+                    ->sort('Created'),
                 $cartResConfig = GridFieldConfig_RecordViewer::create()
             );
         }
