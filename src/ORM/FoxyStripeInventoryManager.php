@@ -12,6 +12,16 @@ use SilverStripe\Forms\DropdownField;
 use SilverStripe\Core\Extension;
 use UncleCheese\DisplayLogic\Forms\Wrapper;
 
+/**
+ * Class FoxyStripeInventoryManager
+ * @package Dynamic\FoxyStripe\ORM
+ *
+ * @property boolean $ControlInventory
+ * @property int $PurchaseLimit
+ * @property int $EmbargoLimit
+ *
+ * @property-read \Dynamic\FoxyStripe\Page\ProductPage|\Dynamic\FoxyStripe\ORM\FoxyStripeInventoryManager $owner
+ */
 class FoxyStripeInventoryManager extends DataExtension
 {
     /**
