@@ -2,7 +2,6 @@
 
 namespace Dynamic\FoxyStripe\Extension;
 
-
 use SilverStripe\Core\Extension;
 
 /**
@@ -14,7 +13,8 @@ use SilverStripe\Core\Extension;
 class QuantityFieldExtension extends Extension
 {
 
-    public function onBeforeRender() {
+    public function onBeforeRender()
+    {
         if (!$this->owner->getProduct()->getHasInventory()) {
             return;
         }
@@ -25,16 +25,30 @@ class QuantityFieldExtension extends Extension
     }
 
     /**
-     * @param $value
+     * Limit the quantity to the number available
+     * @param $quantity
      */
-    public function updateValue(&$value)
+    public function updateQuantity(&$quantity)
     {
         if (!$this->owner->getProduct()->getHasInventory()) {
             return;
         }
 
-        if ($value >= $this->owner->getProduct()->getNumberAvailable()) {
-            $value = $this->owner->getProduct()->getNumberAvailable();
+        if ($quantity >= $this->owner->getProduct()->getNumberAvailable()) {
+            $quantity = $this->owner->getProduct()->getNumberAvailable();
         }
+    }
+
+    /**
+     * Adds limit
+     * @param $data
+     */
+    public function updateData(&$data)
+    {
+        if (!$this->owner->getProduct()->getHasInventory()) {
+            return;
+        }
+
+        $data['limit'] = (int) $this->owner->getProduct()->getNumberAvailable();
     }
 }
