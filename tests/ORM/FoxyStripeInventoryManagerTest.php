@@ -44,7 +44,7 @@ class FoxyStripeInventoryManagerTest extends SapphireTest
     public function testFoxyStripePurchaseForm()
     {
         $object = $this->objFromFixture(TestProduct::class, 'one');
-        $controller = new TestProductController($object);
+        $controller = TestProductController::create($object);
         $form = $controller->PurchaseForm();
         $this->assertInstanceOf(Form::class, $form);
     }

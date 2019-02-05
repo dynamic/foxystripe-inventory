@@ -8,7 +8,7 @@ use SilverStripe\Core\Extension;
  * Class QuantityFieldExtension
  * @package Dynamic\FoxyStripe\Extension
  *
- * @property-read \Dynamic\FoxyStripe\Form\QuantityField|\Dynamic\FoxyStripe\Extension\QuantityFieldExtension $owner
+ * @property-read \Dynamic\FoxyStripe\Form\QuantityField $owner
  */
 class QuantityFieldExtension extends Extension
 {
