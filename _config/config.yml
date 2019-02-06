@@ -12,3 +12,7 @@ Dynamic\FoxyStripe\Page\ProductPageController:
 Dynamic\FoxyStripe\Form\FoxyStripePurchaseForm:
   extensions:
     - Dynamic\FoxyStripe\Extension\PurchaseFormExtension
+
+Dynamic\FoxyStripe\Form\QuantityField:
+  extensions:
+    - Dynamic\FoxyStripe\Extension\QuantityFieldExtension

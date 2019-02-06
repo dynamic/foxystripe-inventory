@@ -16,7 +16,11 @@ use SilverStripe\Forms\HiddenField;
  */
 class PurchaseFormExtension extends Extension
 {
-    public function updatePurchaseFormFields(FieldList $fields)
+
+    /**
+     * @param \SilverStripe\Forms\FieldList $fields
+     */
+    public function updatePurchaseFormFields(FieldList &$fields)
     {
         if ($this->owner->getProduct()->CartExpiration) {
             $fields->insertBefore(
@@ -32,28 +36,44 @@ class PurchaseFormExtension extends Extension
                     )
             );
         }
+
+        if ($this  ->isOutOfStock()) {
+            $fields = FieldList::create(
+                HeaderField::create('OutOfStock', 'Out of stock')
+                    ->setHeadingLevel(3)
+            );
+        }
     }
 
     /**
-     * @param FieldList $fields
+     * @param \SilverStripe\Forms\FieldList $actions
      */
-    public function updateFoxyStripePurchaseFormActions(FieldList $fields)
+    public function updateFoxyStripePurchaseFormActions(FieldList &$actions)
     {
-        if ($this->owner->getProduct()->ControlInventory) {
-            $reserved = ProductCartReservation::get()
-                ->filter([
-                    'Code' => $this->owner->getProduct()->Code,
-                    'Expires:GreaterThan' => date('Y-m-d H:i:s', strtotime('now')),
-                ])->count();
-            $sold = $this->owner->getProduct()->getNumberPurchased();
-
-            if ($reserved + $sold >= $this->owner->getProduct()->PurchaseLimit) {
-                $fields->replaceField(
-                    'action_',
-                    HeaderField::create('OutOfStock', 'Out of stock')
-                        ->setHeadingLevel(3)
-                );
-            }
+        if ($this->isOutOfStock()) {
+            $actions = FieldList::create();
         }
+    }
+
+    /**
+     * @return bool
+     */
+    public function isOutOfStock()
+    {
+        if (!$this->owner->getProduct()->ControlInventory) {
+            return false;
+        }
+        $reserved = ProductCartReservation::get()
+            ->filter([
+                'Code' => $this->owner->getProduct()->Code,
+                'Expires:GreaterThan' => date('Y-m-d H:i:s', strtotime('now')),
+            ])->count();
+        $sold = $this->owner->getProduct()->getNumberPurchased();
+
+        if ($reserved + $sold >= $this->owner->getProduct()->PurchaseLimit) {
+            return true;
+        }
+
+        return false;
     }
 }

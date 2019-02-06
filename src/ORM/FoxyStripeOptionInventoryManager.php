@@ -10,6 +10,15 @@ use SilverStripe\Forms\ReadonlyField;
 use SilverStripe\ORM\DataExtension;
 use UncleCheese\DisplayLogic\Forms\Wrapper;
 
+/**
+ * Class FoxyStripeOptionInventoryManager
+ * @package Dynamic\FoxyStripe\ORM
+ *
+ * @property bool $ControlInventory
+ * @property int $PurchaseLimit
+ *
+ * @property-read \Dynamic\FoxyStripe\Model\OptionItem $owner
+ */
 class FoxyStripeOptionInventoryManager extends DataExtension
 {
     /**
