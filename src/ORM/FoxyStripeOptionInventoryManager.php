@@ -10,6 +10,15 @@ use SilverStripe\Forms\ReadonlyField;
 use SilverStripe\ORM\DataExtension;
 use UncleCheese\DisplayLogic\Forms\Wrapper;
 
+/**
+ * Class FoxyStripeOptionInventoryManager
+ * @package Dynamic\FoxyStripe\ORM
+ *
+ * @property bool $ControlInventory
+ * @property int $PurchaseLimit
+ *
+ * @property-read \Dynamic\FoxyStripe\Model\OptionItem $owner
+ */
 class FoxyStripeOptionInventoryManager extends DataExtension
 {
     /**
@@ -57,7 +66,7 @@ class FoxyStripeOptionInventoryManager extends DataExtension
     public function getIsOptionAvailable()
     {
         if ($this->getHasInventory()) {
-            return $this->owner->PurchaseLimit > $this->getNumberPurchased();
+            return $this->owner->PurchaseLimit >= $this->getNumberPurchased();
         }
         return true;
     }
