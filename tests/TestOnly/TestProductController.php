@@ -4,6 +4,7 @@ namespace Dynamic\FoxyStripe\Test\TestOnly;
 
 use Dynamic\FoxyStripe\ORM\FoxyStripeInventoryManagerExtension;
 use Dynamic\FoxyStripe\Page\ProductPageController;
+use SilverStripe\Dev\TestOnly;
 
 /**
  * Class TestProductController
@@ -13,7 +14,7 @@ use Dynamic\FoxyStripe\Page\ProductPageController;
  * @mixin \Dynamic\FoxyStripe\Page\ProductPage
  * @mixin FoxyStripeInventoryManagerExtension
  */
-class TestProductController extends ProductPageController
+class TestProductController extends ProductPageController implements TestOnly
 {
     /**
      * @var array

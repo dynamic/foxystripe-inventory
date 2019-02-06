@@ -8,7 +8,6 @@ use Dynamic\FoxyStripe\Test\TestOnly\TestProductController;
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\Form;
-use SilverStripe\Forms\HeaderField;
 
 class FoxyStripeInventoryManagerTest extends SapphireTest
 {
@@ -28,6 +27,13 @@ class FoxyStripeInventoryManagerTest extends SapphireTest
     ];
 
     /**
+     * @var array
+     */
+    protected static $extra_controllers = [
+        TestProductController::class,
+    ];
+
+    /**
      *
      */
     public function testUpdateCMSFields()
@@ -43,8 +49,11 @@ class FoxyStripeInventoryManagerTest extends SapphireTest
      */
     public function testFoxyStripePurchaseForm()
     {
+        /** @var TestProduct $object */
         $object = $this->objFromFixture(TestProduct::class, 'one');
+        /** @var TestProductController $controller */
         $controller = TestProductController::create($object);
+        print_r(get_class($controller->getFailover()));
         $form = $controller->PurchaseForm();
         $this->assertInstanceOf(Form::class, $form);
     }
