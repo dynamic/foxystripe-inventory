@@ -66,7 +66,7 @@ class FoxyStripeOptionInventoryManager extends DataExtension
     public function getIsOptionAvailable()
     {
         if ($this->getHasInventory()) {
-            return $this->owner->PurchaseLimit >= $this->getNumberPurchased();
+            return $this->owner->PurchaseLimit > $this->getNumberPurchased();
         }
         return true;
     }

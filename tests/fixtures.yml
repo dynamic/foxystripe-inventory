@@ -13,14 +13,6 @@ Dynamic\FoxyStripe\Model\Order:
   one:
     OrderTotal: '$20.00'
 
-Dynamic\FoxyStripe\Model\OrderDetail:
-  one:
-    Quantity: 2
-    ProductID: =>Dynamic\FoxyStripe\Test\TestOnly\TestProduct.one
-  two:
-    Quantity: 1
-    ProductID: =>Dynamic\FoxyStripe\Test\TestOnly\TestProduct.one
-
 Dynamic\FoxyStripe\Model\OptionGroup:
   default:
     Title: 'Options'
