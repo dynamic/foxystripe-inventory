@@ -15,9 +15,14 @@ class QuantityFieldExtension extends Extension
 
     public function onBeforeRender()
     {
+        if (!$this->owner->getProduct()->hasMethod('getHasInventory')) {
+            return;
+        }
+
         if (!$this->owner->getProduct()->getHasInventory()) {
             return;
         }
+
         $this->owner->setAttribute(
             'data-limit',
             $this->owner->getProduct()->getNumberAvailable()
@@ -30,6 +35,10 @@ class QuantityFieldExtension extends Extension
      */
     public function updateQuantity(&$quantity)
     {
+        if (!$this->owner->getProduct()->hasMethod('getHasInventory')) {
+            return;
+        }
+
         if (!$this->owner->getProduct()->getHasInventory()) {
             return;
         }
@@ -45,6 +54,10 @@ class QuantityFieldExtension extends Extension
      */
     public function updateData(&$data)
     {
+        if (!$this->owner->getProduct()->hasMethod('getHasInventory')) {
+            return;
+        }
+
         if (!$this->owner->getProduct()->getHasInventory()) {
             return;
         }
