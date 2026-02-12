@@ -16,6 +16,14 @@ class FoxyStripeInventoryManagerTest extends SapphireTest
     /**
      * @var array
      */
+    protected static $required_extensions = [
+        TestProduct::class => [
+            \Dynamic\FoxyStripe\ORM\FoxyStripeInventoryManager::class ,
+        ],
+    ];
+    /**
+     * @var array
+     */
     protected static $fixture_file = array(
         '../fixtures.yml',
     );
@@ -24,15 +32,15 @@ class FoxyStripeInventoryManagerTest extends SapphireTest
      * @var array
      */
     protected static $extra_dataobjects = [
-        TestProduct::class,
-        TestOption::class,
+        TestProduct::class ,
+        TestOption::class ,
     ];
 
     /**
      * @var array
      */
     protected static $extra_controllers = [
-        TestProductController::class,
+        TestProductController::class ,
     ];
 
     /**
@@ -40,9 +48,9 @@ class FoxyStripeInventoryManagerTest extends SapphireTest
      */
     public function testUpdateCMSFields()
     {
-        $object = $this->objFromFixture(TestProduct::class, 'one');
+        $object = $this->objFromFixture(TestProduct::class , 'one');
         $fields = $object->getCMSFields();
-        $this->assertInstanceOf(FieldList::class, $fields);
+        $this->assertInstanceOf(FieldList::class , $fields);
         $this->assertNotNull($fields->dataFieldByName('ControlInventory'));
     }
 
@@ -52,11 +60,11 @@ class FoxyStripeInventoryManagerTest extends SapphireTest
     public function testFoxyStripePurchaseForm()
     {
         /** @var TestProduct $object */
-        $object = $this->objFromFixture(TestProduct::class, 'one');
+        $object = $this->objFromFixture(TestProduct::class , 'one');
         /** @var TestProductController $controller */
         $controller = TestProductController::create($object);
         $form = $controller->PurchaseForm();
-        $this->assertInstanceOf(Form::class, $form);
+        $this->assertInstanceOf(Form::class , $form);
     }
 
     /**
@@ -65,7 +73,7 @@ class FoxyStripeInventoryManagerTest extends SapphireTest
     public function testGetHasInventory()
     {
         /** @var TestProduct $product */
-        $product = $this->objFromFixture(TestProduct::class, 'one');
+        $product = $this->objFromFixture(TestProduct::class , 'one');
 
         $product->ControlInventory = false;
         $product->PurchaseLimit = 0;
@@ -90,7 +98,7 @@ class FoxyStripeInventoryManagerTest extends SapphireTest
     public function testGetIsProductAvailable()
     {
         /** @var TestProduct $product */
-        $product = $this->objFromFixture(TestProduct::class, 'one');
+        $product = $this->objFromFixture(TestProduct::class , 'one');
 
         // no inventory control
         $product->ControlInventory = false;
@@ -109,7 +117,7 @@ class FoxyStripeInventoryManagerTest extends SapphireTest
 
         /** @var OrderDetail $detail */
         $detail = OrderDetail::create();
-        $detail->OrderID = $this->objFromFixture(Order::class, 'one')->ID;
+        $detail->OrderID = $this->objFromFixture(Order::class , 'one')->ID;
         $detail->Quantity = 10;
         $detail->ProductID = $product->ID;
         $detail->write();
@@ -126,13 +134,13 @@ class FoxyStripeInventoryManagerTest extends SapphireTest
     public function testGetNumberPurchased()
     {
         /** @var TestProduct $product */
-        $product = $this->objFromFixture(TestProduct::class, 'one');
+        $product = $this->objFromFixture(TestProduct::class , 'one');
 
         $this->assertEquals(0, $product->getNumberPurchased());
 
         /** @var OrderDetail $detail */
         $detail = OrderDetail::create();
-        $detail->OrderID = $this->objFromFixture(Order::class, 'one')->ID;
+        $detail->OrderID = $this->objFromFixture(Order::class , 'one')->ID;
         $detail->Quantity = 10;
         $detail->ProductID = $product->ID;
         $detail->write();
@@ -146,13 +154,13 @@ class FoxyStripeInventoryManagerTest extends SapphireTest
     public function testGetOrders()
     {
         /** @var TestProduct $product */
-        $product = $this->objFromFixture(TestProduct::class, 'one');
+        $product = $this->objFromFixture(TestProduct::class , 'one');
 
         $this->assertEquals(0, $product->getOrders()->Count());
 
         /** @var OrderDetail $detail */
         $detail = OrderDetail::create();
-        $detail->OrderID = $this->objFromFixture(Order::class, 'one')->ID;
+        $detail->OrderID = $this->objFromFixture(Order::class , 'one')->ID;
         $detail->Quantity = 10;
         $detail->ProductID = $product->ID;
         $detail->write();
