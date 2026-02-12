@@ -51,7 +51,7 @@
     "extra": {
         "installer-name": "foxystripe-inventory",
         "branch-alias": {
-            "dev-master": "3.x-dev"
+            "dev-main": "5.0.x-dev"
         },
         "expose": [
             "client/dist"
